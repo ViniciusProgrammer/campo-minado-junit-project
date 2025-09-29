@@ -1,5 +1,3 @@
-package campominado.excecao;
-
 import campominado.modelo.Tabuleiro;
 
 public class App {
