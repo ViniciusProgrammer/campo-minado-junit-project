@@ -21,6 +21,14 @@ public class Tabuleiro {
 		sortearAsMinas();
 	}
 
+	public void abrir(int linha, int coluna) {
+		campos.parallelStream().filter(c -> c.getLinha() == linha && c.getColuna() == coluna).findFirst().ifPresent(c -> c.abrir());
+	}
+
+	public void alterarMarcacao(int linha, int coluna) {
+		campos.parallelStream().filter(c -> c.getLinha() == linha && c.getColuna() == coluna).findFirst().ifPresent(c -> c.alterarMarcacao());
+	}
+	
 	private void gerarCampos() {
 		for (int i = 0; i < linhas; i++) {
 			for (int j = 0; j < colunas; j++) {
@@ -56,5 +64,23 @@ public class Tabuleiro {
 	public void reiniciarJogo() {
 		campos.stream().forEach(c -> c.reiniciar());
 		sortearAsMinas();
+	}
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		
+		int indice = 0;
+		
+		for (int i = 0; i < linhas; i++) {
+			for (int j = 0; j < colunas; j++) {
+				stringBuilder.append(" ");
+				stringBuilder.append(campos.get(indice));
+				stringBuilder.append(" ");
+				indice++;
+			}
+			stringBuilder.append("\n");
+		}
+		
+		return stringBuilder.toString();
 	}
 }
